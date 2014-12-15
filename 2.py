@@ -5,8 +5,8 @@ def fileread(filename):
   return f.read()    
 def urlread(url):
   return urllib.urlopen(url).read()
-
-fstring = urlread(sys.argv[1]).split("<!--")[2].split('-->')[0]
+url = "http://www.pythonchallenge.com/pc/def/ocr.html"
+fstring = urlread(url).split("<!--")[2].split('-->')[0]
 print fstring
 strset = list(set(fstring))
 print strset
