@@ -1,21 +1,22 @@
 import zipfile
 
-filepath = "channel/"
-filename = filepath+ "90052" + ".txt"
-print "filename = " + filename
-filestr = open(filename,'r').read()
-print "filestr = " + filestr 
-for i in range(1):
-  filename = filepath + filestr.split("is ")[1].split('\n')[0] + ".txt"
-  print str(i) + "filename = " + filename
-  filestr = open(filename,'r').read()
-  print str(i) + "filestr = " + filestr 
+zzz = zipfile.ZipFile('channel.zip','r')
+filestr = '90052'
+comment = []
+for i in range(1000):
+  fname = filestr + ".txt"
+  for j in zzz.infolist():
+    if j.filename == fname :
+      print j.comment
+      comment.append(j.comment)
+      break
+  inzzz = zzz.open(fname).read()
+  print 'fname = ' + fname
+  print 'inzzz = ' + inzzz
+  try:
+    filestr = inzzz.split('is ')[1].split('\n')[0] 
+  except IndexError:
+    print " ".join(comment)
+    break
 
-from os import listdir
-dirlist = listdir('channel/')
-comlist = []
-for i in dirlist:
-  comlist.append(i+' = '+open(filepath+i,'r').read())
-
-for i in comlist:
-  print i
+#zzz.read()
